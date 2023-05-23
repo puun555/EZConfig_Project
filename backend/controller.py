@@ -33,8 +33,7 @@ def exitP():
     cmd.send_command("logout")
     
 def configTerminal():
-    result = cmd.send_command("config terminal")
-    print(result)
+    cmd.send_command("config terminal")
     
 def addRoute():
     changeStatus("config")
