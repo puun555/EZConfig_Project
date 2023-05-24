@@ -28,9 +28,10 @@ def ping():
 def end():
     cmd.send_command("end")
     
-def exitP():
+def logout():
     end()
     cmd.send_command("logout")
+
     
 def configTerminal():
     cmd.send_command("config terminal")
