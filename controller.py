@@ -1,4 +1,5 @@
 # controller
+import netmiko
 
 cisco_ios = {
     "device_type": "cisco_ios_telnet",
