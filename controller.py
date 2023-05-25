@@ -4,7 +4,7 @@ from netmiko import *
 cisco_ios = {
     "device_type": "cisco_ios_telnet",
     "host": "10.144.10.10",
-    "port" : "5003",
+    "port" : "5002",
     "username" : "",
     "password" : ""
 }
@@ -78,4 +78,4 @@ def changeStatus(status, want):
             configTerminal()
             status = "config"
 
-# showRunningConfig()
+print(cmd.is_alive())
