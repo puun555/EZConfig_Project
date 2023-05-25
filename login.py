@@ -7,10 +7,11 @@ class App:
         root.title("Cisco IOS Telnet")
         #setting window size
         width=400
-        height=300
+        height=300 
         screenwidth = root.winfo_screenwidth()
         screenheight = root.winfo_screenheight()
         alignstr = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
+        root.background="#fff"
         root.geometry(alignstr)
         root.resizable(width=False, height=False)
 
