@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from netmiko import *
+from tkinter import messagebox
 
 class App:
     
@@ -141,7 +142,7 @@ class App:
     def login(self):
         cmd = ConnectHandler(**cisco_ios)
         if cmd.is_alive:
-            tk.messagebox.showinfo(title="Cisco IOS Telnet", message="Connected Success!")
+            messagebox.showinfo(title="Cisco IOS Telnet", message="Connected Success!")
 
 if __name__ == "__main__":
     root = tk.Tk()
