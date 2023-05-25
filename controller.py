@@ -1,6 +1,6 @@
 # controller
-from netmiko import *
 
+from netmiko import *;
 cisco_ios = {
     "device_type": "cisco_ios_telnet",
     "host": "10.144.10.10",
