@@ -141,8 +141,13 @@ class App:
 
     def login(self):
         cmd = ConnectHandler(**cisco_ios)
-        if cmd.is_alive:
-            messagebox.showinfo(title="Cisco IOS Telnet", message="Connected Success!")
+        try:
+            if cmd.is_alive:
+                messagebox.showinfo(title="Cisco IOS Telnet", message="Connected Success!")
+            else:
+                messagebox.showerror(titile="Cisco IOS Telnet", message="Connected Failed!")
+        except:
+            p
 
 if __name__ == "__main__":
     root = tk.Tk()
