@@ -145,15 +145,18 @@ class App:
             with ConnectHandler(**cisco_ios) as cmd:
                 messagebox.showinfo(title="Cisco IOS Telnet", message="Connected Success!")
                 self.openMainWindow()
+                self.cancelCommand()
         except:
             messagebox.showerror(titile="Cisco IOS Telnet", message="Connected Failed!")
 
     def openMainWindow(self):
-        print("s")
+        mainapp = tk.Tk()
+        mainapp.mainloop
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = App(root)
     root.mainloop()
+    
 
 
