@@ -19,7 +19,7 @@ class App:
         lb_ip=tk.Label(root)
         ft = tkFont.Font(family='Times',size=11)
         lb_ip["font"] = ft
-        lb_ip["fg"] = "#333333"
+        lb_ip["fg"] = "#000"
         lb_ip["justify"] = "center"
         lb_ip["text"] = "IP"
         lb_ip.place(x=100,y=30,width=70,height=25)
@@ -28,7 +28,7 @@ class App:
         GLineEdit_321["borderwidth"] = "1px"
         # ft = tkFont.Font(family='Times',size=11)
         GLineEdit_321["font"] = tkFont.Font(family='Times',size=11)
-        GLineEdit_321["fg"] = "#333333"
+        GLineEdit_321["fg"] = "#000"
         GLineEdit_321["justify"] = "left"
         # GLineEdit_321["text"] = "zxczxc"
         GLineEdit_321.place(x=200,y=30,width=90,height=25)
@@ -36,7 +36,7 @@ class App:
         lb_port=tk.Label(root)
         ft = tkFont.Font(family='Times',size=11)
         lb_port["font"] = ft
-        lb_port["fg"] = "#333333"
+        lb_port["fg"] = "#000"
         lb_port["justify"] = "left"
         lb_port["text"] = "Port"
         lb_port.place(x=100,y=80,width=70,height=25)
@@ -44,7 +44,7 @@ class App:
         lb_username=tk.Label(root)
         ft = tkFont.Font(family='Times',size=11)
         lb_username["font"] = ft
-        lb_username["fg"] = "#333333"
+        lb_username["fg"] = "#000"
         lb_username["justify"] = "right"
         lb_username["text"] = "Username"
         lb_username.place(x=100,y=130,width=70,height=25)
@@ -62,7 +62,7 @@ class App:
         lb_password=tk.Label(root)
         ft = tkFont.Font(family='Times',size=11)
         lb_password["font"] = ft
-        lb_password["fg"] = "#333333"
+        lb_password["fg"] = "#000"
         lb_password["justify"] = "right"
         lb_password["text"] = "Password"
         lb_password.place(x=100,y=180,width=70,height=25)
@@ -71,7 +71,7 @@ class App:
         txt_2["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=11)
         txt_2["font"] = ft
-        txt_2["fg"] = "#333333"
+        txt_2["fg"] = "#000"
         txt_2["justify"] = "left"
         txt_2["text"] = ""
         txt_2.place(x=200,y=80,width=90,height=25)
@@ -80,7 +80,7 @@ class App:
         GLineEdit_304["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=11)
         GLineEdit_304["font"] = ft
-        GLineEdit_304["fg"] = "#333333"
+        GLineEdit_304["fg"] = "#000"
         GLineEdit_304["justify"] = "left"
         GLineEdit_304["text"] = ""
         GLineEdit_304.place(x=200,y=130,width=90,height=25)
@@ -89,7 +89,7 @@ class App:
         GLineEdit_584["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=11)
         GLineEdit_584["font"] = ft
-        GLineEdit_584["fg"] = "#333333"
+        GLineEdit_584["fg"] = "#000"
         GLineEdit_584["justify"] = "left"
         GLineEdit_584["text"] = ""
         GLineEdit_584.place(x=200,y=180,width=90,height=25)
