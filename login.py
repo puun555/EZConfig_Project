@@ -1,7 +1,9 @@
 import tkinter as tk
 import tkinter.font as tkFont
+from netmiko import *
 
 class App:
+    
     def __init__(self, root):
         #setting title
         root.title("Cisco IOS Telnet")
@@ -26,15 +28,16 @@ class App:
         lb_ip["text"] = "IP"
         lb_ip.place(x=100,y=30,width=70,height=25)
 
-        GLineEdit_321=tk.Entry(root)
-        GLineEdit_321["borderwidth"] = "1px"
+        global txt_ip
+        txt_ip=tk.Entry(root)
+        txt_ip["borderwidth"] = "1px"
         # ft = tkFont.Font(family='Times',size=11)
-        GLineEdit_321["font"] = tkFont.Font(family='Times',size=11)
-        GLineEdit_321["fg"] = "#000"
-        GLineEdit_321["bg"] = "#fff"
-        GLineEdit_321["justify"] = "left"
-        # GLineEdit_321["text"] = "zxczxc"
-        GLineEdit_321.place(x=200,y=30,width=90,height=25)
+        txt_ip["font"] = tkFont.Font(family='Times',size=11)
+        txt_ip["fg"] = "#000"
+        txt_ip["bg"] = "#fff"
+        txt_ip["justify"] = "left"
+        # txt_ip["text"] = "zxczxc"
+        txt_ip.place(x=200,y=30,width=90,height=25)
 
         lb_port=tk.Label(root)
         ft = tkFont.Font(family='Times',size=11)
@@ -62,7 +65,7 @@ class App:
         btn_cancel["justify"] = "center"
         btn_cancel["text"] = "Cancel"
         btn_cancel.place(x=200,y=230,width=70,height=25)
-        btn_cancel["command"] = self.GButton_342_command
+        btn_cancel["command"] = self.cancelCommand
 
         lb_password=tk.Label(root)
         ft = tkFont.Font(family='Times',size=11)
@@ -73,35 +76,38 @@ class App:
         lb_password["text"] = "Password"
         lb_password.place(x=100,y=180,width=70,height=25)
 
-        txt_2=tk.Entry(root)
-        txt_2["borderwidth"] = "1px"
+        global txt_port
+        txt_port=tk.Entry(root)
+        txt_port["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=11)
-        txt_2["font"] = ft
-        txt_2["fg"] = "#000"
-        txt_2["bg"] = "#fff"
-        txt_2["justify"] = "left"
-        txt_2["text"] = ""
-        txt_2.place(x=200,y=80,width=90,height=25)
+        txt_port["font"] = ft
+        txt_port["fg"] = "#000"
+        txt_port["bg"] = "#fff"
+        txt_port["justify"] = "left"
+        txt_port["text"] = ""
+        txt_port.place(x=200,y=80,width=90,height=25)
 
-        GLineEdit_304=tk.Entry(root)
-        GLineEdit_304["borderwidth"] = "1px"
+        global txt_username
+        txt_username=tk.Entry(root)
+        txt_username["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=11)
-        GLineEdit_304["font"] = ft
-        GLineEdit_304["fg"] = "#000"
-        GLineEdit_304["bg"] = "#fff"
-        GLineEdit_304["justify"] = "left"
-        GLineEdit_304["text"] = ""
-        GLineEdit_304.place(x=200,y=130,width=90,height=25)
+        txt_username["font"] = ft
+        txt_username["fg"] = "#000"
+        txt_username["bg"] = "#fff"
+        txt_username["justify"] = "left"
+        txt_username["text"] = ""
+        txt_username.place(x=200,y=130,width=90,height=25)
 
-        GLineEdit_584=tk.Entry(root)
-        GLineEdit_584["borderwidth"] = "1px"
+        global txt_password
+        txt_password=tk.Entry(root)
+        txt_password["borderwidth"] = "1px"
         ft = tkFont.Font(family='Times',size=11)
-        GLineEdit_584["font"] = ft
-        GLineEdit_584["fg"] = "#000"
-        GLineEdit_584["bg"] = "#fff"
-        GLineEdit_584["justify"] = "left"
-        GLineEdit_584["text"] = ""
-        GLineEdit_584.place(x=200,y=180,width=90,height=25)
+        txt_password["font"] = ft
+        txt_password["fg"] = "#000"
+        txt_password["bg"] = "#fff"
+        txt_password["justify"] = "left"
+        txt_password["text"] = ""
+        txt_password.place(x=200,y=180,width=90,height=25)
 
         btn_connect=tk.Button(root)
         btn_connect["bg"] = "#fff"
@@ -111,15 +117,31 @@ class App:
         btn_connect["justify"] = "center"
         btn_connect["text"] = "Connect"
         btn_connect.place(x=100,y=230,width=70,height=25)
-        btn_connect["command"] = self.GButton_482_command
+        btn_connect["command"] = self.connectCommand
 
+    
+    def connectCommand(self):
+        global cisco_ios 
+        cisco_ios = {
+        "device_type": "cisco_ios_telnet",
+        "host": "",
+        "port" : "",
+        "username" : "",
+        "password" : ""
+        }
+        cisco_ios["host"] = txt_ip.get()
+        cisco_ios["port"] = txt_port.get()
+        cisco_ios["username"] = txt_username.get()
+        cisco_ios["password"] = txt_password.get()
+        app.login()
 
-    def GButton_342_command(self):
-        print("command")
+    def cancelCommand(self):
+        self.destroy()
 
-
-    def GButton_482_command(self):
-        print("command")
+    def login(self):
+        cmd = ConnectHandler(**cisco_ios)
+        if cmd.is_alive:
+            tk.messagebox.showinfo(title="Cisco IOS Telnet", message="Connected Success!")
 
 if __name__ == "__main__":
     root = tk.Tk()

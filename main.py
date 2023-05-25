@@ -4,7 +4,7 @@ import tkinter as tk
 
 # import sys
 # sys.path.append("backend")
-# import controller
+import controller
 
 def print_something(text):
     print(text)
