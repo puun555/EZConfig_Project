@@ -1,5 +1,9 @@
 # controller
+<<<<<<< Updated upstream
 from netmiko import *
+=======
+from netmiko import *;
+>>>>>>> Stashed changes
 
 cisco_ios = {
     "device_type": "cisco_ios_telnet",
