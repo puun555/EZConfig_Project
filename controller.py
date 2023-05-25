@@ -4,7 +4,9 @@ from netmiko import *
 cisco_ios = {
     "device_type": "cisco_ios_telnet",
     "host": "10.144.10.10",
-    "port" : "5002"
+    "port" : "5003",
+    "username" : "",
+    "password" : ""
 }
 
 cmd = ConnectHandler(**cisco_ios)
