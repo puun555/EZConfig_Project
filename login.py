@@ -137,19 +137,23 @@ class App:
         app.login()
 
     def cancelCommand(self):
-        self.destroy()
+        root.destroy()
 
     def login(self):
         cmd = ConnectHandler(**cisco_ios)
         try:
-            if cmd.is_alive:
+            with ConnectHandler(**cisco_ios) as cmd:
                 messagebox.showinfo(title="Cisco IOS Telnet", message="Connected Success!")
-            else:
-                messagebox.showerror(titile="Cisco IOS Telnet", message="Connected Failed!")
+                self.openMainWindow()
         except:
-            p
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Connected Failed!")
+
+    def openMainWindow(self):
+        print("s")
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = App(root)
     root.mainloop()
+
+
