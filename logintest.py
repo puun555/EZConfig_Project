@@ -152,12 +152,11 @@ class App:
 
     def openMainWindow(self):
         app = tk.Tk()
-        mf = MainFrame(app)
-        mf.mainloop()
+        mf = MainFrame(app,cmd)
+        app.mainloop()
 
 class MainFrame:
-    def __init__(self,app):
-
+    def __init__(self,app,cmd):
         app.title('Ezconfig')
         app.geometry("800x600")
 
@@ -297,8 +296,9 @@ class MainFrame:
         tk.Label(secure_frame, text="Security Set-up").grid(row=0, column=0, columnspan=3)
         
         tk.Label(secure_frame, text="Set Enable Password : ").grid(row=1, column=0)
-        tk.Entry(secure_frame, bd=2).grid(row=1, column=1)
-        tk.Button(secure_frame, text="Set").grid(row=1, column=2)
+        global password
+        password = tk.Entry(secure_frame, bd=2).grid(row=1, column=1)
+        tk.Button(secure_frame, text="Set",command=lambda:set_enable()).grid(row=1, column=2)
         
         '''Service'''
         service_frame = tk.Frame(config_frame)
@@ -308,16 +308,19 @@ class MainFrame:
         tk.Label(service_frame, text="Set Your Services").grid(row=0, column=0, columnspan=3)
         
         tk.Label(service_frame, text="NTP Server Address : ").grid(row=1, column=0)
-        tk.Entry(service_frame, bd=2).grid(row=1, column=1)
-        tk.Button(service_frame, text="Set").grid(row=1, column=2)
+        global ntp
+        ntp = tk.Entry(service_frame, bd=2).grid(row=1, column=1)
+        tk.Button(service_frame, text="Set",command=lambda:set_ntp()).grid(row=1, column=2)
         
         tk.Label(service_frame, text="Syslogs Server Address : ").grid(row=2, column=0)
-        tk.Entry(service_frame, bd=2).grid(row=2, column=1)
-        tk.Button(service_frame, text="Set").grid(row=2, column=2)
+        global syslog
+        syslog = tk.Entry(service_frame, bd=2).grid(row=2, column=1)
+        tk.Button(service_frame, text="Set",command=lambda:set_syslog()).grid(row=2, column=2)
         
         tk.Label(service_frame, text="TFTP Server Address : ").grid(row=3, column=0)
-        tk.Entry(service_frame, bd=2).grid(row=3, column=1)
-        tk.Button(service_frame, text="Set").grid(row=3, column=2)
+        global tftp
+        tftp = tk.Entry(service_frame, bd=2).grid(row=3, column=1)
+        tk.Button(service_frame, text="Send",command=lambda:set_tftp).grid(row=3, column=2)
         
         
         '''DHCP'''
@@ -392,10 +395,30 @@ class MainFrame:
             runningConf.delete("1.0","end")
             runningConf.insert(tk.END, result)
         
+        def set_ntp():
+            ip = ntp.get()
+            result = cmd.send_config_set(["ntp server {0}".format(ip)])
+            runningConf.delete("1.0","end")
+            runningConf.insert(tk.END, result)
+
+        def set_syslog():
+            ip = syslog.get()
+            result = cmd.send_config_set(["logging {0}".format(ip),"logging trap debugging","service timestamps log datetime msec"])
+            runningConf.delete("1.0","end")
+            runningConf.insert(tk.END, result)
+
+        def set_tftp():
+            ip = tftp.get()
+            cmd.save_config()
+            result = cmd.send_multiline(["copy startup-config tftp:","{0}\r\n".format(ip)])
+            runningConf.delete("1.0","end")
+            runningConf.insert(tk.END, result)
         
-        
-        
-        
+        def set_enable():
+            pw = password.get()
+            result = cmd.send_config_set(["enable secret {0}".format(pw)])
+            runningConf.delete("1.0","end")
+            runningConf.insert(tk.END, result)
         
         
     
