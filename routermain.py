@@ -32,7 +32,7 @@ def shw_ip_eigrp():
 
 app = tk.Tk()
 app.title('Ezconfig')
-app.geometry("800x1000")
+app.geometry("800x1100")
 
 '''Left Frame'''
 left_frame = tk.Frame(app)
@@ -256,27 +256,21 @@ label.pack()
 
 tk.Button(dynamic_route_frame, text="Set Routing Protocol").pack()
 
-'''Default Route'''
+'''Static Route'''
 default_route_frame = tk.Frame(config_frame)
 default_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
 default_route_frame.columnconfigure(0,weight=1)
 
 
-tk.Label(default_route_frame, text="Set Default Route").grid(row=0, column=0, columnspan=3)
-tk.Label(default_route_frame, text="Next-Hop Interace : ").grid(row=1, column=0)
+tk.Label(default_route_frame, text="Set Default Route").grid(row=0, column=0, columnspan=2)
+tk.Label(default_route_frame, text="Destination Network : ").grid(row=1, column=0)
 tk.Entry(default_route_frame, bd=2).grid(row=1, column=1)
-tk.Button(default_route_frame, text="Set").grid(row=1, column=2)
+tk.Label(default_route_frame, text="Destination Netmask : ").grid(row=2, column=0)
+tk.Entry(default_route_frame, bd=2).grid(row=2, column=1)
+tk.Label(default_route_frame, text="Next-Hop Interface : ").grid(row=3, column=0)
+tk.Entry(default_route_frame, bd=2).grid(row=3, column=1)
+tk.Button(default_route_frame, text="Set").grid(row=4, column=0, columnspan=2)
 
-'''Secure'''
-secure_frame = tk.Frame(config_frame)
-secure_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
-secure_frame.columnconfigure(0, weight=1)
-
-tk.Label(secure_frame, text="Security Set-up").grid(row=0, column=0, columnspan=3)
-
-tk.Label(secure_frame, text="Set Enable Password : ").grid(row=1, column=0)
-tk.Entry(secure_frame, bd=2).grid(row=1, column=1)
-tk.Button(secure_frame, text="Set").grid(row=1, column=2)
 
 '''Service'''
 service_frame = tk.Frame(config_frame)
@@ -313,13 +307,16 @@ tk.Entry(dhcp_frame, bd=2).grid(row=2, column=1)
 tk.Label(dhcp_frame, text="Subnet Mask").grid(row=3, column=0)
 tk.Entry(dhcp_frame, bd=2).grid(row=3, column=1)
 
-tk.Label(dhcp_frame, text="(Optional)DNS Server : ").grid(row=4, column=0)
+tk.Label(dhcp_frame, text="Default Router : ").grid(row=4, column=0)
 tk.Entry(dhcp_frame, bd=2).grid(row=4, column=1)
 
-tk.Label(dhcp_frame, text="(Optional)Domain-name : ").grid(row=5, column=0)
+tk.Label(dhcp_frame, text="(Optional)DNS Server : ").grid(row=5, column=0)
 tk.Entry(dhcp_frame, bd=2).grid(row=5, column=1)
 
-tk.Button(dhcp_frame, text="Set").grid(row=6, column=0, columnspan=3)
+tk.Label(dhcp_frame, text="(Optional)Domain-name : ").grid(row=6, column=0)
+tk.Entry(dhcp_frame, bd=2).grid(row=6, column=1)
+
+tk.Button(dhcp_frame, text="Set").grid(row=7, column=0, columnspan=3)
 
 
 
