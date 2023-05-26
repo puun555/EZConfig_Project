@@ -266,13 +266,13 @@ class MainFrame:
         var = tk.IntVar()
 
         tk.Radiobutton(dynamic_route_frame, text="OSPF", variable=var, value=1,
-                          command=sel).pack()
+                          command=lambda:sel()).pack()
         
         tk.Radiobutton(dynamic_route_frame, text="EIGRP", variable=var, value=2,
-                          command=sel).pack()
+                          command=lambda:sel()).pack()
         
         tk.Radiobutton(dynamic_route_frame, text="RIPv2", variable=var, value=3,
-                          command=sel).pack()
+                          command=lambda:sel()).pack()
         
         label = tk.Label(dynamic_route_frame)
         label.pack()
