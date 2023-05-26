@@ -1,2 +1,2 @@
 # EZConfig_Project
-Project Network basic config by Automations
+Project Network basic config 
