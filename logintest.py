@@ -346,183 +346,176 @@ class MainFrame:
 
         tk.Button(dhcp_frame, text="Set").grid(row=7, column=0, columnspan=3)
         
-        def sel1():
-            selection = "You have selected OSPF"
-            label.config(text = selection)
-
-            route_app = tk.Tk()
-            route_app.title("OSPF")
-                
-            network_area_frame = tk.Frame(route_app)
-            network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
-                
-            tk.Label(network_area_frame, text="OSPF Nextwork Area").grid(row=0, column=0, columnspan=3)
-                
-            tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
-            tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
-                
-            tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
-                
-            tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
-                
-            tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
-                
-            tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
-                
-            tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
-                
-            tk.Label(network_area_frame, text="Router Piority : ").grid(row=7, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=7, column=1)
-                
-            tk.Button(network_area_frame, text="Set").grid(row=8, column=0, columnspan=3)
-        
-        def sel2():
-            selection = "You have selected EIGRP"
-            label.config(text = selection)
-            route_app = tk.Tk()
-            route_app.title("EIGRP")
-                
-            network_area_frame = tk.Frame(route_app)
-            network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
-                
-            tk.Label(network_area_frame, text="EIGRP Nextwork Area").grid(row=0, column=0, columnspan=3)
-                
-            tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
-            tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
-                
-            tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
-                
-            tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
-                
-            tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
-                
-            tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
-                
-            tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
-            tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
-                
-            tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=3)
-
-        def sel3():
-            selection = "You have selected RIPv2"
-            label.config(text = selection)
-            route_app = tk.Tk()
-            route_app.title("RIPv2")
-                
-            network_area_frame = tk.Frame(route_app)
-            network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
-                
-            tk.Label(network_area_frame, text="RIPv2 Nextwork Area").grid(row=0, column=0, columnspan=2)
-                
-            tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
-                
-            tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
-                
-            tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
-                
-            tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
-                
-            tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
-                
-            tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
-            tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
-                
-            tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=2)
-
-        def shw_run():
-            running = cmd.send_command("show run")
-            runningConf.delete("1.0", "end")
-            runningConf.insert(tk.END, running)
+    def sel1():
+        selection = "You have selected OSPF"
+        label.config(text = selection)
+        route_app = tk.Tk()
+        route_app.title("OSPF")
             
-        def shw_ip_route():
-            routee = cmd.send_command("show ip route")
-            runningConf.delete("1.0", "end")
-            runningConf.insert(tk.END, routee)
+        network_area_frame = tk.Frame(route_app)
+        network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
             
-        def shw_ip_int():
-            intbr = cmd.send_command("show ip int br")
-            runningConf.delete("1.0", "end")
-            runningConf.insert(tk.END, intbr)
+        tk.Label(network_area_frame, text="OSPF Nextwork Area").grid(row=0, column=0, columnspan=3)
             
-        def shw_ip_ospf():
-            ospf_nei = cmd.send_command("show ip ospf neighbor")
-            runningConf.delete("1.0", "end")
-            runningConf.insert(tk.END, ospf_nei)
+        tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
+        tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
             
-        def shw_ip_eigrp():
-            eigrp_nei = cmd.send_command("show ip eigrp neighbor")
-            runningConf.delete("1.0", "end")
-            runningConf.insert(tk.END, eigrp_nei)
-
-        def add_ip_to_interface():
-            int = interface_form.get()
-            ip = ip_form.get()
-            subnet = subnetmask.get()
-            result = cmd.send_config_set(["int {0}".format(int), "ip address {0} {1}".format(ip,subnet)])
-            runningConf.delete("1.0","end")
-            runningConf.insert(tk.END, result)
+        tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
+            
+        tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
+            
+        tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
+            
+        tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
+            
+        tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
+            
+        tk.Label(network_area_frame, text="Router Piority : ").grid(row=7, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=7, column=1)
+            
+        tk.Button(network_area_frame, text="Set").grid(row=8, column=0, columnspan=3)
+    
+    def sel2():
+        selection = "You have selected EIGRP"
+        label.config(text = selection)
+        route_app = tk.Tk()
+        route_app.title("EIGRP")
+            
+        network_area_frame = tk.Frame(route_app)
+        network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
+            
+        tk.Label(network_area_frame, text="EIGRP Nextwork Area").grid(row=0, column=0, columnspan=3)
+            
+        tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
+        tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
+            
+        tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
+            
+        tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
+            
+        tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
+            
+        tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
+            
+        tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
+        tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
+            
+        tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=3)
+    def sel3():
+        selection = "You have selected RIPv2"
+        label.config(text = selection)
+        route_app = tk.Tk()
+        route_app.title("RIPv2")
+            
+        network_area_frame = tk.Frame(route_app)
+        network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
+            
+        tk.Label(network_area_frame, text="RIPv2 Nextwork Area").grid(row=0, column=0, columnspan=2)
+            
+        tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
+            
+        tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
+            
+        tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
+            
+        tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
+            
+        tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
+            
+        tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
+        tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
+            
+        tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=2)
+    def shw_run():
+        running = cmd.send_command("show run")
+        runningConf.delete("1.0", "end")
+        runningConf.insert(tk.END, running)
         
-        def int_shutdown():
-            int = interface_form.get()
-            result = cmd.send_config_set(["int {0}".format(int),"shutdown"])
-            runningConf.delete("1.0","end")
-            runningConf.insert(tk.END, result)
-
-        def int_no_shutdown():
-            int = interface_form.get()
-            result = cmd.send_config_set(["int {0}".format(int),"no shutdown"])
-            runningConf.delete("1.0","end")
-            runningConf.insert(tk.END, result)
+    def shw_ip_route():
+        routee = cmd.send_command("show ip route")
+        runningConf.delete("1.0", "end")
+        runningConf.insert(tk.END, routee)
         
-        def set_ntp():
-            ip = ntp.get()
-            result = cmd.send_config_set(["ntp server {0}".format(ip)])
-            runningConf.delete("1.0","end")
-            runningConf.insert(tk.END, result)
-
-        def set_syslog():
-            ip = syslog.get()
-            result = cmd.send_config_set(["logging {0}".format(ip),"logging trap debugging","service timestamps log datetime msec"])
-            runningConf.delete("1.0","end")
-            runningConf.insert(tk.END, result)
-
-        def set_tftp():
-            ip = tftp.get()
-            cmd.save_config()
-            result = cmd.send_multiline(["copy startup-config tftp:","{0}\r\n".format(ip)])
-            runningConf.delete("1.0","end")
-            runningConf.insert(tk.END, result)
+    def shw_ip_int():
+        intbr = cmd.send_command("show ip int br")
+        runningConf.delete("1.0", "end")
+        runningConf.insert(tk.END, intbr)
         
-        def static_route():        
-            dest = destination.get()
-            subnet = subnet.get()
-            nexthop = nexthop.get()
-            result = cmd.send_config_set(["ip route {0} {1} {2}".format(dest,subnet,nexthop)])
-            runningConf.delete("1.0","end")
-            runningConf.insert(tk.END, result)
+    def shw_ip_ospf():
+        ospf_nei = cmd.send_command("show ip ospf neighbor")
+        runningConf.delete("1.0", "end")
+        runningConf.insert(tk.END, ospf_nei)
+        
+    def shw_ip_eigrp():
+        eigrp_nei = cmd.send_command("show ip eigrp neighbor")
+        runningConf.delete("1.0", "end")
+        runningConf.insert(tk.END, eigrp_nei)
+    def add_ip_to_interface():
+        int = interface_form.get()
+        ip = ip_form.get()
+        subnet = subnetmask.get()
+        result = cmd.send_config_set(["int {0}".format(int), "ip address {0} {1}".format(ip,subnet)])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
+    
+    def int_shutdown(self):
+        int = interface_form.get()
+        result = cmd.send_config_set(["int {0}".format(int),"shutdown"])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
+    def int_no_shutdown(self):
+        int = interface_form.get()
+        result = cmd.send_config_set(["int {0}".format(int),"no shutdown"])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
+    
+    def set_ntp():
+        ip = ntp.get()
+        result = cmd.send_config_set(["ntp server {0}".format(ip)])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
+    def set_syslog():
+        ip = syslog.get()
+        result = cmd.send_config_set(["logging {0}".format(ip),"logging trap debugging","service timestamps log datetime msec"])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
+    def set_tftp():
+        ip = tftp.get()
+        cmd.save_config()
+        result = cmd.send_multiline(["copy startup-config tftp:","{0}\r\n".format(ip)])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
+    
+    def static_route():        
+        dest = destination.get()
+        subnet = subnet.get()
+        nexthop = nexthop.get()
+        result = cmd.send_config_set(["ip route {0} {1} {2}".format(dest,subnet,nexthop)])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
         
     
 
