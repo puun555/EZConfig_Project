@@ -135,8 +135,8 @@ class App:
         cisco_ios["username"] = txt_username.get()
         cisco_ios["password"] = txt_password.get()
         if txt_ip.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out IP Address correctly!")
-        elif txt_port.get() == "":
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out IP Address correctly!")
+        if txt_port.get() == "":
             cisco_ios["port"] = "23"
         app.login()
 
@@ -152,7 +152,7 @@ class App:
                 self.openMainWindow()
                 self.cancelCommand()
         except:
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Connected Failed!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Connected Failed!")
 
     def openMainWindow(self):
         app = tk.Tk()
@@ -556,7 +556,7 @@ class MainFrame:
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
         if interface_form.get() == "" or ip_form.get() == "" or subnetmask.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out the information correctly!")
     
     def int_shutdown(self):
         int = interface_form.get()
@@ -564,14 +564,14 @@ class MainFrame:
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
         if interface_form.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out the information correctly!")
     def int_no_shutdown(self):
         int = interface_form.get()
         result = cmd.send_config_set(["int {0}".format(int),"no shutdown"])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
         if interface_form.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out the information correctly!")
     
     def set_ntp(self):
         ip = ntps.get()
@@ -579,14 +579,14 @@ class MainFrame:
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
         if ntps.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out the information correctly!")
     def set_syslog(self):
         ip = syslogs.get()
         result = cmd.send_config_set(["logging {0}".format(ip),"logging trap debugging","service timestamps log datetime msec"])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
         if syslogs.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out the information correctly!")
     
     def static_route(self):
         dest = destination.get()
@@ -596,7 +596,7 @@ class MainFrame:
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
         if destination.get() == "" or subnetmask_static.get() == "" or nexthop.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out the information correctly!")
         
     def set_dhcp(self):
         pool = pool_name.get()
@@ -611,7 +611,7 @@ class MainFrame:
         if dm_name.get() != "":
             dhcp_pool.append("domain-name {0}".format(dm))
         if pool_name.get() == "" or net_area.get() == "" or snm.get() == "" or default.get() == "":
-            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+            messagebox.showerror(title="Cisco IOS Telnet", message="Please fill out the information correctly!")
         result = cmd.send_config_set(dhcp_pool)
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
