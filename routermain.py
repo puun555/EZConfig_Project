@@ -30,7 +30,7 @@ def shw_ip_eigrp():
 
 app = tk.Tk()
 app.title('Ezconfig')
-app.geometry("800x600")
+app.geometry("800x1000")
 
 '''Left Frame'''
 left_frame = tk.Frame(app)
@@ -174,6 +174,49 @@ tk.Label(secure_frame, text="Security Set-up").grid(row=0, column=0, columnspan=
 tk.Label(secure_frame, text="Set Enable Password : ").grid(row=1, column=0)
 tk.Entry(secure_frame, bd=2).grid(row=1, column=1)
 tk.Button(secure_frame, text="Set").grid(row=1, column=2)
+
+'''Service'''
+service_frame = tk.Frame(config_frame)
+service_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+service_frame.columnconfigure(0, weight=1)
+
+tk.Label(service_frame, text="Set Your Services").grid(row=0, column=0, columnspan=3)
+
+tk.Label(service_frame, text="NTP Server Address : ").grid(row=1, column=0)
+tk.Entry(service_frame, bd=2).grid(row=1, column=1)
+tk.Button(service_frame, text="Set").grid(row=1, column=2)
+
+tk.Label(service_frame, text="Syslogs Server Address : ").grid(row=2, column=0)
+tk.Entry(service_frame, bd=2).grid(row=2, column=1)
+tk.Button(service_frame, text="Set").grid(row=2, column=2)
+
+tk.Label(service_frame, text="TFTP Server Address : ").grid(row=3, column=0)
+tk.Entry(service_frame, bd=2).grid(row=3, column=1)
+tk.Button(service_frame, text="Set").grid(row=3, column=2)
+
+
+'''DHCP'''
+dhcp_frame = tk.Frame(config_frame)
+dhcp_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+dhcp_frame.columnconfigure(0, weight=1)
+
+tk.Label(dhcp_frame, text="Setup DHCP Server").grid(row=0, column=0, columnspan=3)
+
+tk.Label(dhcp_frame, text="DHCP Pools Name : ").grid(row=1, column=0)
+tk.Entry(dhcp_frame, bd=2).grid(row=1, column=1)
+tk.Label(dhcp_frame, text="Subnet Mask").grid(row=1, column=2)
+
+tk.Label(dhcp_frame, text="Network Area : ").grid(row=2, column=0)
+tk.Entry(dhcp_frame, bd=2).grid(row=2, column=1)
+tk.Entry(dhcp_frame, bd=2).grid(row=2, column=2)
+
+tk.Label(dhcp_frame, text="(Optional) DNS Server Address : ").grid(row=3, column=0)
+tk.Entry(dhcp_frame, bd=2).grid(row=3, column=1)
+
+tk.Label(dhcp_frame, text="(Optional) Domain-name : ").grid(row=4, column=0)
+tk.Entry(dhcp_frame, bd=2).grid(row=4, column=1)
+
+tk.Button(dhcp_frame, text="Set").grid(row=5, column=2)
 
 
 
