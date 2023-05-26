@@ -134,6 +134,10 @@ class App:
         cisco_ios["port"] = txt_port.get()
         cisco_ios["username"] = txt_username.get()
         cisco_ios["password"] = txt_password.get()
+        if txt_ip.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out IP Address correctly!")
+        elif txt_port.get() == "":
+            cisco_ios["port"] = "23"
         app.login()
 
     def cancelCommand(self):
@@ -543,7 +547,7 @@ class MainFrame:
         eigrp_nei = cmd.send_command("show ip eigrp neighbor")
         runningConf.delete("1.0", "end")
         runningConf.insert(tk.END, eigrp_nei)
-        
+
     def add_ip_to_interface(self):
         int = interface_form.get()
         ip = ip_form.get()
