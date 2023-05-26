@@ -327,7 +327,7 @@ class MainFrame:
         tk.Button(service_frame, text="Set",command=lambda:self.set_syslog()).grid(row=2, column=2)
         
         # tk.Label(service_frame, text="TFTP Server Address : ").grid(row=3, column=0)
-        # global tftps
+        # global tftps e
         # tftps = tk.Entry(service_frame, bd=2)
         # tftps.grid(row=3, column=1)
         # tk.Button(service_frame, text="Send",command=lambda:self.set_tftp()).grid(row=3, column=2)
