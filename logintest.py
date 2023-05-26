@@ -543,6 +543,7 @@ class MainFrame:
         eigrp_nei = cmd.send_command("show ip eigrp neighbor")
         runningConf.delete("1.0", "end")
         runningConf.insert(tk.END, eigrp_nei)
+        
     def add_ip_to_interface(self):
         int = interface_form.get()
         ip = ip_form.get()
@@ -550,28 +551,38 @@ class MainFrame:
         result = cmd.send_config_set(["int {0}".format(int), "ip address {0} {1}".format(ip,subnet)])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
+        if interface_form.get() == "" or ip_form.get() == "" or subnetmask.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
     
     def int_shutdown(self):
         int = interface_form.get()
         result = cmd.send_config_set(["int {0}".format(int),"shutdown"])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
+        if interface_form.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
     def int_no_shutdown(self):
         int = interface_form.get()
         result = cmd.send_config_set(["int {0}".format(int),"no shutdown"])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
+        if interface_form.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
     
     def set_ntp(self):
         ip = ntps.get()
         result = cmd.send_config_set(["ntp server {0}".format(ip)])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
+        if ntps.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
     def set_syslog(self):
         ip = syslogs.get()
         result = cmd.send_config_set(["logging {0}".format(ip),"logging trap debugging","service timestamps log datetime msec"])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
+        if syslogs.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
     
     def static_route(self):
         dest = destination.get()
@@ -580,6 +591,8 @@ class MainFrame:
         result = cmd.send_config_set(["ip route {0} {1} {2}".format(dest,subnet,next)])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
+        if destination.get() == "" or subnetmask_static.get() == "" or nexthop.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
         
     def set_dhcp(self):
         pool = pool_name.get()
@@ -588,8 +601,14 @@ class MainFrame:
         df = default.get()
         dn = dns.get()
         dm = dm_name.get()
-        result = cmd.send_config_set(["ip dhcp pool {0}".format(pool),"network {0} {1}".format(net,sn),
-                                      "default-router {0}".format(df),"dns-server {0}".format(dn),"domain-name {0}".format(dm)])
+        dhcp_pool = ["ip dhcp pool {0}".format(pool),"network {0} {1}".format(net,sn),"default-router {0}".format(df)]
+        if dns.get() != "":
+            dhcp_pool.append("dns-server {0}".format(dn))
+        if dm_name.get() != "":
+            dhcp_pool.append("domain-name {0}".format(dm))
+        if pool_name.get() == "" or net_area.get() == "" or snm.get() == "" or default.get() == "":
+            messagebox.showerror(titile="Cisco IOS Telnet", message="Please fill out the information correctly!")
+        result = cmd.send_config_set(dhcp_pool)
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
 
