@@ -279,19 +279,22 @@ class MainFrame:
         label.pack()
 
         '''Static Route'''
-        default_route_frame = tk.Frame(config_frame)
-        default_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
-        default_route_frame.columnconfigure(0,weight=1)
+        static_route_frame = tk.Frame(config_frame)
+        static_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+        static_route_frame.columnconfigure(0,weight=1)
 
 
-        tk.Label(default_route_frame, text="Set Default Route").grid(row=0, column=0, columnspan=2)
-        tk.Label(default_route_frame, text="Destination Network : ").grid(row=1, column=0)
-        tk.Entry(default_route_frame, bd=2).grid(row=1, column=1)
-        tk.Label(default_route_frame, text="Destination Netmask : ").grid(row=2, column=0)
-        tk.Entry(default_route_frame, bd=2).grid(row=2, column=1)
-        tk.Label(default_route_frame, text="Next-Hop Interface : ").grid(row=3, column=0)
-        tk.Entry(default_route_frame, bd=2).grid(row=3, column=1)
-        tk.Button(default_route_frame, text="Set").grid(row=4, column=0, columnspan=2)
+        tk.Label(static_route_frame, text="Set Static Route").grid(row=0, column=0, columnspan=2)
+        tk.Label(static_route_frame, text="Destination Network : ").grid(row=1, column=0)
+        global destination
+        destination = tk.Entry(static_route_frame, bd=2).grid(row=1, column=1)
+        tk.Label(static_route_frame, text="Destination Netmask : ").grid(row=2, column=0)
+        global subnet
+        subnet = tk.Entry(static_route_frame, bd=2).grid(row=2, column=1)
+        tk.Label(static_route_frame, text="Next-Hop Interface : ").grid(row=3, column=0)
+        global nexthop
+        nexthop = tk.Entry(static_route_frame, bd=2).grid(row=3, column=1)
+        tk.Button(static_route_frame, text="Set", command=lambda:static_route()).grid(row=4, column=0, columnspan=2)
         
         
         '''Service'''
@@ -513,7 +516,13 @@ class MainFrame:
             runningConf.delete("1.0","end")
             runningConf.insert(tk.END, result)
         
-        
+        def static_route():        
+            dest = destination.get()
+            subnet = subnet.get()
+            nexthop = nexthop.get()
+            result = cmd.send_config_set(["ip route {0} {1} {2}".format(dest,subnet,nexthop)])
+            runningConf.delete("1.0","end")
+            runningConf.insert(tk.END, result)
         
     
 
