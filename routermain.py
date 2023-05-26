@@ -254,8 +254,6 @@ tk.Radiobutton(dynamic_route_frame, text="RIPv2", variable=var, value=3,
 label = tk.Label(dynamic_route_frame)
 label.pack()
 
-tk.Button(dynamic_route_frame, text="Set Routing Protocol").pack()
-
 '''Static Route'''
 default_route_frame = tk.Frame(config_frame)
 default_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
