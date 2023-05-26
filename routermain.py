@@ -8,25 +8,27 @@ def shw_run():
     runningConf.delete("1.0", "end")
     runningConf.insert(tk.END, running)
     
+def shw_ip_int():
+    intbr = "Ip interface Brief"
+    runningConf.delete("1.0", "end")
+    runningConf.insert(tk.END, intbr)
+
 def shw_ip_route():
     routee = "Route is yours"
     runningConf.delete("1.0", "end")
     runningConf.insert(tk.END, routee)
     
-def shw_ip_int():
-    intbr = "Ip interface Brief"
-    runningConf.delete("1.0", "end")
-    runningConf.insert(tk.END, intbr)
-    
 def shw_ip_ospf():
-    ospf_nei = "Ospf neighbor"
+    ospf_text = "yoyoyoyoyoyyo"
     runningConf.delete("1.0", "end")
-    runningConf.insert(tk.END, ospf_nei)
+    runningConf.insert(tk.END, ospf_text)
     
 def shw_ip_eigrp():
-    eigrp_nei = "Eigrp neighbor"
+    eigrp_text = "sdsdsdsdsdsdsdsdsdsdsd"
     runningConf.delete("1.0", "end")
-    runningConf.insert(tk.END, eigrp_nei)
+    runningConf.insert(tk.END, eigrp_text)
+
+
 
 app = tk.Tk()
 app.title('Ezconfig')
@@ -80,10 +82,10 @@ tk.Button(shw_route,text='Show ip route!', bg = "yellow",
           command=lambda:shw_ip_route()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
 
 tk.Button(shw_ospf,text='Show ospf neighbor!', bg = "yellow",
-          command=shw_ip_ospf()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
+          command=lambda:shw_ip_ospf()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
 
-tk.Button(shw_eigrp,text='Show eigrp neighbor', bg = "yellow",
-          command=shw_ip_eigrp()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
+tk.Button(shw_eigrp,text='Show eigrp neighbor!', bg = "yellow",
+          command=lambda:shw_ip_eigrp()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
 
 '''Config Frame'''
 
@@ -130,6 +132,7 @@ tk.Button(add_ip_button, text="No Shut"
 '''Routing Protocol'''
 dynamic_route_frame = tk.Frame(config_frame)
 dynamic_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+dynamic_route_frame.columnconfigure(0,weight=1)
 
 '''Protocol Select'''
 tk.Label(dynamic_route_frame, text="Dynamic Route Protocol Select").pack(side=tk.TOP)
@@ -137,6 +140,105 @@ tk.Label(dynamic_route_frame, text="Dynamic Route Protocol Select").pack(side=tk
 def sel():
    selection = "You selected the option " + str(var.get())
    label.config(text = selection)
+   
+   if var.get() == 1 :
+       route_app = tk.Tk()
+       route_app.title("OSPF")
+       
+       network_area_frame = tk.Frame(route_app)
+       network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
+       
+       tk.Label(network_area_frame, text="OSPF Nextwork Area").grid(row=0, column=0, columnspan=3)
+       
+       tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
+       tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
+       
+       tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
+       
+       tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
+       
+       tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
+       
+       tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
+       
+       tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
+       
+       tk.Label(network_area_frame, text="Router Piority : ").grid(row=7, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=7, column=1)
+       
+       tk.Button(network_area_frame, text="Set").grid(row=8, column=0, columnspan=3)
+   elif var.get() == 2 :
+       route_app = tk.Tk()
+       route_app.title("EIGRP")
+       
+       network_area_frame = tk.Frame(route_app)
+       network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
+       
+       tk.Label(network_area_frame, text="EIGRP Nextwork Area").grid(row=0, column=0, columnspan=3)
+       
+       tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
+       tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
+       
+       tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
+       
+       tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
+       
+       tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
+       
+       tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
+       
+       tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
+       tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
+       
+       tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=3)
+       
+   elif var.get() == 3 :
+       route_app = tk.Tk()
+       route_app.title("RIPv2")
+       
+       network_area_frame = tk.Frame(route_app)
+       network_area_frame.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=10, pady=5)
+       
+       tk.Label(network_area_frame, text="RIPv2 Nextwork Area").grid(row=0, column=0, columnspan=2)
+       
+       tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
+       
+       tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
+       
+       tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
+       
+       tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
+       
+       tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
+       
+       tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
+       tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
+       
+       tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=2)
+       
 
 var = tk.IntVar()
 
@@ -158,6 +260,7 @@ tk.Button(dynamic_route_frame, text="Set Routing Protocol").pack()
 default_route_frame = tk.Frame(config_frame)
 default_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
 default_route_frame.columnconfigure(0,weight=1)
+
 
 tk.Label(default_route_frame, text="Set Default Route").grid(row=0, column=0, columnspan=3)
 tk.Label(default_route_frame, text="Next-Hop Interace : ").grid(row=1, column=0)
@@ -204,19 +307,19 @@ tk.Label(dhcp_frame, text="Setup DHCP Server").grid(row=0, column=0, columnspan=
 
 tk.Label(dhcp_frame, text="DHCP Pools Name : ").grid(row=1, column=0)
 tk.Entry(dhcp_frame, bd=2).grid(row=1, column=1)
-tk.Label(dhcp_frame, text="Subnet Mask").grid(row=1, column=2)
 
 tk.Label(dhcp_frame, text="Network Area : ").grid(row=2, column=0)
 tk.Entry(dhcp_frame, bd=2).grid(row=2, column=1)
-tk.Entry(dhcp_frame, bd=2).grid(row=2, column=2)
-
-tk.Label(dhcp_frame, text="(Optional) DNS Server Address : ").grid(row=3, column=0)
+tk.Label(dhcp_frame, text="Subnet Mask").grid(row=3, column=0)
 tk.Entry(dhcp_frame, bd=2).grid(row=3, column=1)
 
-tk.Label(dhcp_frame, text="(Optional) Domain-name : ").grid(row=4, column=0)
+tk.Label(dhcp_frame, text="(Optional)DNS Server : ").grid(row=4, column=0)
 tk.Entry(dhcp_frame, bd=2).grid(row=4, column=1)
 
-tk.Button(dhcp_frame, text="Set").grid(row=5, column=2)
+tk.Label(dhcp_frame, text="(Optional)Domain-name : ").grid(row=5, column=0)
+tk.Entry(dhcp_frame, bd=2).grid(row=5, column=1)
+
+tk.Button(dhcp_frame, text="Set").grid(row=6, column=0, columnspan=3)
 
 
 
