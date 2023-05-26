@@ -32,7 +32,7 @@ def shw_ip_eigrp():
 
 app = tk.Tk()
 app.title('Ezconfig')
-app.geometry("800x1100")
+app.geometry("800x1000")
 
 '''Left Frame'''
 left_frame = tk.Frame(app)
