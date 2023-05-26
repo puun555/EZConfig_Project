@@ -174,6 +174,7 @@ class MainFrame:
         text_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
         text_frame.config(background="White")
 
+        global runningConf
         runningConf = tk.Text(text_frame)
         runningConf.pack( expand=True, fill=tk.BOTH, padx=10, pady=5)
 
@@ -199,19 +200,18 @@ class MainFrame:
         shw_eigrp.pack(side=tk.TOP,  expand=True, fill=tk.X, padx=10, pady=5)
 
         tk.Button(runconf_frame,text='Show Running Config!', bg = "yellow", 
-                command=lambda:shw_run()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
+                command=lambda:self.shw_run()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
 
         tk.Button(intbr_frame,text='Show ip interface brief!', bg = "yellow", 
-                command=lambda:shw_ip_int()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
+                command=lambda:self.shw_ip_int()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
 
         tk.Button(shw_route,text='Show ip route!', bg = "yellow",
-                command=lambda:shw_ip_route()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
+                command=lambda:self.shw_ip_route()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
 
         tk.Button(shw_ospf,text='Show ospf neighbor!', bg = "yellow",
-                command=lambda:shw_ip_ospf()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
-
+                command=lambda:self.shw_ip_ospf()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
         tk.Button(shw_eigrp,text='Show eigrp neighbor', bg = "yellow",
-                command=lambda:shw_ip_eigrp()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
+                command=lambda:self.shw_ip_eigrp()).pack(side=tk.LEFT, expand = True, fill=tk.BOTH)
 
         '''Config Frame'''
 
@@ -230,16 +230,19 @@ class MainFrame:
 
         # Interface frame
         tk.Label(add_ip_frame, text='Interface : ').grid(column=0, row=1)
+        global interface_form
         interface_form = tk.Entry(add_ip_frame, bd=2)
         interface_form.grid(column=1, row=1)
 
         # IP frame
         tk.Label(add_ip_frame, text='IP : ').grid(column=0, row=3)
+        global ip_form
         ip_form = tk.Entry(add_ip_frame, bd=2)
         ip_form.grid(column=1, row=3)
 
         # netmask frame
         tk.Label(add_ip_frame, text='Subnet Mask : ').grid(column=0, row=4)
+        global subnetmask
         subnetmask = tk.Entry(add_ip_frame, bd=2)
         subnetmask.grid(column=1, row=4)
 
@@ -247,11 +250,11 @@ class MainFrame:
         add_ip_button = tk.Frame(add_ip_frame)
         add_ip_button.grid(column=0, row=5, columnspan=2)
 
-        tk.Button(add_ip_button, text="Add", command=lambda:add_ip_to_interface()
+        tk.Button(add_ip_button, text="Add", command=lambda:self.add_ip_to_interface()
                 ).pack(side=tk.LEFT)
-        tk.Button(add_ip_button, text="Shutdown", command=lambda:int_shutdown()
+        tk.Button(add_ip_button, text="Shutdown", command=lambda:self.int_shutdown()
                 ).pack(side=tk.LEFT)
-        tk.Button(add_ip_button, text="No Shut",command=lambda:int_no_shutdown()
+        tk.Button(add_ip_button, text="No Shut",command=lambda:self.int_no_shutdown()
                 ).pack(side=tk.LEFT)
 
 
@@ -267,14 +270,14 @@ class MainFrame:
         var = tk.IntVar()
 
         tk.Radiobutton(dynamic_route_frame, text="OSPF", variable=var, value=1,
-                        command=lambda:sel1()).pack()
+                        command=lambda:self.sel1()).pack()
 
         tk.Radiobutton(dynamic_route_frame, text="EIGRP", variable=var, value=2,
-                        command=lambda:sel2()).pack()
+                        command=lambda:self.sel2()).pack()
 
         tk.Radiobutton(dynamic_route_frame, text="RIPv2", variable=var, value=3,
-                        command=lambda:sel3()).pack()
-
+                        command=lambda:self.sel3()).pack()
+        global label
         label = tk.Label(dynamic_route_frame)
         label.pack()
 
@@ -287,14 +290,17 @@ class MainFrame:
         tk.Label(static_route_frame, text="Set Static Route").grid(row=0, column=0, columnspan=2)
         tk.Label(static_route_frame, text="Destination Network : ").grid(row=1, column=0)
         global destination
-        destination = tk.Entry(static_route_frame, bd=2).grid(row=1, column=1)
+        destination = tk.Entry(static_route_frame, bd=2)
+        destination.grid(row=1, column=1)
         tk.Label(static_route_frame, text="Destination Netmask : ").grid(row=2, column=0)
-        global subnet
-        subnet = tk.Entry(static_route_frame, bd=2).grid(row=2, column=1)
+        global subnetmask_static
+        subnetmask_static = tk.Entry(static_route_frame, bd=2)
+        subnetmask_static.grid(row=2, column=1)
         tk.Label(static_route_frame, text="Next-Hop Interface : ").grid(row=3, column=0)
         global nexthop
-        nexthop = tk.Entry(static_route_frame, bd=2).grid(row=3, column=1)
-        tk.Button(static_route_frame, text="Set", command=lambda:static_route()).grid(row=4, column=0, columnspan=2)
+        nexthop = tk.Entry(static_route_frame, bd=2)
+        nexthop.grid(row=3, column=1)
+        tk.Button(static_route_frame, text="Set", command=lambda:self.static_route()).grid(row=4, column=0, columnspan=2)
         
         
         '''Service'''
@@ -305,19 +311,22 @@ class MainFrame:
         tk.Label(service_frame, text="Set Your Services").grid(row=0, column=0, columnspan=3)
         
         tk.Label(service_frame, text="NTP Server Address : ").grid(row=1, column=0)
-        global ntp
-        ntp = tk.Entry(service_frame, bd=2).grid(row=1, column=1)
-        tk.Button(service_frame, text="Set",command=lambda:set_ntp()).grid(row=1, column=2)
+        global ntps
+        ntps = tk.Entry(service_frame, bd=2)
+        ntps.grid(row=1, column=1)
+        tk.Button(service_frame, text="Set",command=lambda:self.set_ntp()).grid(row=1, column=2)
         
         tk.Label(service_frame, text="Syslogs Server Address : ").grid(row=2, column=0)
-        global syslog
-        syslog = tk.Entry(service_frame, bd=2).grid(row=2, column=1)
-        tk.Button(service_frame, text="Set",command=lambda:set_syslog()).grid(row=2, column=2)
+        global syslogs
+        syslogs = tk.Entry(service_frame, bd=2)
+        syslogs.grid(row=2, column=1)
+        tk.Button(service_frame, text="Set",command=lambda:self.set_syslog()).grid(row=2, column=2)
         
-        tk.Label(service_frame, text="TFTP Server Address : ").grid(row=3, column=0)
-        global tftp
-        tftp = tk.Entry(service_frame, bd=2).grid(row=3, column=1)
-        tk.Button(service_frame, text="Send",command=lambda:set_tftp).grid(row=3, column=2)
+        # tk.Label(service_frame, text="TFTP Server Address : ").grid(row=3, column=0)
+        # global tftps
+        # tftps = tk.Entry(service_frame, bd=2)
+        # tftps.grid(row=3, column=1)
+        # tk.Button(service_frame, text="Send",command=lambda:self.set_tftp()).grid(row=3, column=2)
         
         
         '''DHCP'''
@@ -328,25 +337,37 @@ class MainFrame:
         tk.Label(dhcp_frame, text="Setup DHCP Server").grid(row=0, column=0, columnspan=3)
 
         tk.Label(dhcp_frame, text="DHCP Pools Name : ").grid(row=1, column=0)
-        tk.Entry(dhcp_frame, bd=2).grid(row=1, column=1)
+        global pool_name
+        pool_name = tk.Entry(dhcp_frame, bd=2)
+        pool_name.grid(row=1, column=1)
 
         tk.Label(dhcp_frame, text="Network Area : ").grid(row=2, column=0)
-        tk.Entry(dhcp_frame, bd=2).grid(row=2, column=1)
+        global net_area 
+        net_area = tk.Entry(dhcp_frame, bd=2)
+        net_area.grid(row=2, column=1)
         tk.Label(dhcp_frame, text="Subnet Mask").grid(row=3, column=0)
-        tk.Entry(dhcp_frame, bd=2).grid(row=3, column=1)
+        global snm
+        snm = tk.Entry(dhcp_frame, bd=2)
+        snm.grid(row=3, column=1)
 
         tk.Label(dhcp_frame, text="Default Router : ").grid(row=4, column=0)
-        tk.Entry(dhcp_frame, bd=2).grid(row=4, column=1)
+        global default
+        default = tk.Entry(dhcp_frame, bd=2)
+        default.grid(row=4, column=1)
 
         tk.Label(dhcp_frame, text="(Optional)DNS Server : ").grid(row=5, column=0)
-        tk.Entry(dhcp_frame, bd=2).grid(row=5, column=1)
+        global dns
+        dns = tk.Entry(dhcp_frame, bd=2)
+        dns.grid(row=5, column=1)
 
         tk.Label(dhcp_frame, text="(Optional)Domain-name : ").grid(row=6, column=0)
-        tk.Entry(dhcp_frame, bd=2).grid(row=6, column=1)
+        global dm_name
+        dm_name = tk.Entry(dhcp_frame, bd=2)
+        dm_name.grid(row=6, column=1)
 
-        tk.Button(dhcp_frame, text="Set").grid(row=7, column=0, columnspan=3)
+        tk.Button(dhcp_frame, text="Set",command=lambda:self.set_dhcp()).grid(row=7, column=0, columnspan=3)
         
-    def sel1():
+    def sel1(self):
         selection = "You have selected OSPF"
         label.config(text = selection)
         route_app = tk.Tk()
@@ -361,31 +382,48 @@ class MainFrame:
         tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
             
         tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
+        global onw1,osn1
+        onw1 = tk.Entry(network_area_frame, bd=2)
+        onw1.grid(row=2, column=1)
+        osn1 = tk.Entry(network_area_frame, bd=2)
+        osn1.grid(row=2, column=2)
             
         tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
-            
+        global onw2,osn2
+        onw2 = tk.Entry(network_area_frame, bd=2)
+        onw2.grid(row=3, column=1)
+        osn2 = tk.Entry(network_area_frame, bd=2)
+        osn2.grid(row=3, column=2)
+        
         tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
+        global onw3,osn3
+        onw3 = tk.Entry(network_area_frame, bd=2)
+        onw3.grid(row=4, column=1)
+        osn3 = tk.Entry(network_area_frame, bd=2)
+        osn3.grid(row=4, column=2)
             
         tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
-            
+        global onw4,osn4
+        onw4 = tk.Entry(network_area_frame, bd=2)
+        onw4.grid(row=5, column=1)
+        osn4 = tk.Entry(network_area_frame, bd=2)
+        osn4.grid(row=5, column=2)
+        
         tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
+        global onw5,osn5
+        onw5 = tk.Entry(network_area_frame, bd=2)
+        onw5.grid(row=6, column=1)
+        osn5 = tk.Entry(network_area_frame, bd=2)
+        osn5.grid(row=6, column=2)
             
-        tk.Label(network_area_frame, text="Router Piority : ").grid(row=7, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=7, column=1)
+        tk.Label(network_area_frame, text="Router Priority : ").grid(row=7, column=0)
+        global ospfpri
+        ospfpri = tk.Entry(network_area_frame, bd=2)
+        ospfpri.grid(row=7, column=1)
             
-        tk.Button(network_area_frame, text="Set").grid(row=8, column=0, columnspan=3)
+        tk.Button(network_area_frame, text="Set",command=lambda:self.set_ospf()).grid(row=8, column=0, columnspan=3)
     
-    def sel2():
+    def sel2(self):
         selection = "You have selected EIGRP"
         label.config(text = selection)
         route_app = tk.Tk()
@@ -400,27 +438,48 @@ class MainFrame:
         tk.Label(network_area_frame, text="Wild Card").grid(row=1, column=2)
             
         tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=2, column=2)
+        global enw1,esn1
+        enw1 = tk.Entry(network_area_frame, bd=2)
+        enw1.grid(row=2, column=1)
+        esn1 = tk.Entry(network_area_frame, bd=2)
+        esn1.grid(row=2, column=2)
             
         tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=3, column=2)
+        global enw2,esn2
+        enw2 = tk.Entry(network_area_frame, bd=2)
+        enw2.grid(row=3, column=1)
+        esn2 = tk.Entry(network_area_frame, bd=2)
+        esn2.grid(row=3, column=2)
             
         tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=4, column=2)
+        global enw3,esn3
+        enw3 = tk.Entry(network_area_frame, bd=2)
+        enw3.grid(row=4, column=1)
+        esn3 = tk.Entry(network_area_frame, bd=2)
+        esn3.grid(row=4, column=2)
             
         tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=5, column=2)
+        global enw4,esn4
+        enw4 = tk.Entry(network_area_frame, bd=2)
+        enw4.grid(row=5, column=1)
+        esn4 = tk.Entry(network_area_frame, bd=2)
+        esn4.grid(row=5, column=2)
             
         tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
-        tk.Entry(network_area_frame, bd=2).grid(row=6, column=2)
+        global enw5,esn5
+        enw5 = tk.Entry(network_area_frame, bd=2)
+        enw5.grid(row=6, column=1)
+        esn5 = tk.Entry(network_area_frame, bd=2)
+        esn5.grid(row=6, column=2)
+
+        tk.Label(network_area_frame, text="Router Priority : ").grid(row=7, column=0)
+        global eigrppri
+        eigrppri = tk.Entry(network_area_frame, bd=2)
+        eigrppri.grid(row=7, column=1)
             
-        tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=3)
-    def sel3():
+        tk.Button(network_area_frame, text="Set",command=lambda:self.set_eigrp()).grid(row=7, column=0, columnspan=3)
+
+    def sel3(self):
         selection = "You have selected RIPv2"
         label.config(text = selection)
         route_app = tk.Tk()
@@ -434,46 +493,57 @@ class MainFrame:
         tk.Label(network_area_frame, text="Network Area").grid(row=1, column=1)
             
         tk.Label(network_area_frame, text="1 : ").grid(row=2, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=2, column=1)
+        global rnw1
+        rnw1 = tk.Entry(network_area_frame, bd=2)
+        rnw1.grid(row=2, column=1)
             
         tk.Label(network_area_frame, text="2 : ").grid(row=3, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=3, column=1)
+        global rnw2
+        rnw2 = tk.Entry(network_area_frame, bd=2)
+        rnw2.grid(row=3, column=1)
             
         tk.Label(network_area_frame, text="3 : ").grid(row=4, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=4, column=1)
+        global rnw3
+        rnw3 = tk.Entry(network_area_frame, bd=2)
+        rnw3.grid(row=4, column=1)
             
         tk.Label(network_area_frame, text="4 : ").grid(row=5, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=5, column=1)
+        global rnw4
+        rnw4 = tk.Entry(network_area_frame, bd=2)
+        rnw4.grid(row=5, column=1)
             
         tk.Label(network_area_frame, text="5 : ").grid(row=6, column=0)
-        tk.Entry(network_area_frame, bd=2).grid(row=6, column=1)
-            
-        tk.Button(network_area_frame, text="Set").grid(row=7, column=0, columnspan=2)
-    def shw_run():
+        global rnw5
+        rnw5 = tk.Entry(network_area_frame, bd=2)
+        rnw5.grid(row=6, column=1)
+        
+        tk.Button(network_area_frame, text="Set",command=lambda:self.set_rip()).grid(row=7, column=0, columnspan=2)
+
+    def shw_run(self):
         running = cmd.send_command("show run")
         runningConf.delete("1.0", "end")
         runningConf.insert(tk.END, running)
         
-    def shw_ip_route():
+    def shw_ip_route(self):
         routee = cmd.send_command("show ip route")
         runningConf.delete("1.0", "end")
         runningConf.insert(tk.END, routee)
         
-    def shw_ip_int():
+    def shw_ip_int(self):
         intbr = cmd.send_command("show ip int br")
         runningConf.delete("1.0", "end")
         runningConf.insert(tk.END, intbr)
         
-    def shw_ip_ospf():
+    def shw_ip_ospf(self):
         ospf_nei = cmd.send_command("show ip ospf neighbor")
         runningConf.delete("1.0", "end")
         runningConf.insert(tk.END, ospf_nei)
         
-    def shw_ip_eigrp():
+    def shw_ip_eigrp(self):
         eigrp_nei = cmd.send_command("show ip eigrp neighbor")
         runningConf.delete("1.0", "end")
         runningConf.insert(tk.END, eigrp_nei)
-    def add_ip_to_interface():
+    def add_ip_to_interface(self):
         int = interface_form.get()
         ip = ip_form.get()
         subnet = subnetmask.get()
@@ -492,37 +562,73 @@ class MainFrame:
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
     
-    def set_ntp():
-        ip = ntp.get()
+    def set_ntp(self):
+        ip = ntps.get()
         result = cmd.send_config_set(["ntp server {0}".format(ip)])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
-    def set_syslog():
-        ip = syslog.get()
+    def set_syslog(self):
+        ip = syslogs.get()
         result = cmd.send_config_set(["logging {0}".format(ip),"logging trap debugging","service timestamps log datetime msec"])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
-    def set_tftp():
-        ip = tftp.get()
-        cmd.save_config()
-        result = cmd.send_multiline(["copy startup-config tftp:","{0}\r\n".format(ip)])
-        runningConf.delete("1.0","end")
-        runningConf.insert(tk.END, result)
     
-    def static_route():        
+    def static_route(self):
         dest = destination.get()
-        subnet = subnet.get()
-        nexthop = nexthop.get()
-        result = cmd.send_config_set(["ip route {0} {1} {2}".format(dest,subnet,nexthop)])
+        subnet = subnetmask_static.get()
+        next = nexthop.get()
+        result = cmd.send_config_set(["ip route {0} {1} {2}".format(dest,subnet,next)])
         runningConf.delete("1.0","end")
         runningConf.insert(tk.END, result)
         
-    
+    def set_dhcp(self):
+        pool = pool_name.get()
+        net = net_area.get()
+        sn = snm.get()
+        df = default.get()
+        dn = dns.get()
+        dm = dm_name.get()
+        result = cmd.send_config_set(["ip dhcp pool {0}".format(pool),"network {0} {1}".format(net,sn),
+                                      "default-router {0}".format(df),"dns-server {0}".format(dn),"domain-name {0}".format(dm)])
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
 
+    def set_ospf(self):
+        ospf_nwlist = [onw1.get(),onw2.get(),onw3.get(),onw4.get(),onw5.get()]
+        ospf_snlist = [osn1.get(),osn2.get(),osn3.get(),osn4.get(),osn5.get()]
+        ospf_nw = ["router ospf 1"]
+        for i in range(5):
+            if ospf_nwlist[i] != "" and ospf_snlist[i] != "":
+                ospf_nw.append("network {0} {1} area 0".format(ospf_nwlist[i],ospf_snlist[i]))
+        if ospfpri.get() != "":
+            ospf_nw.append("router-id {0}".format(ospfpri.get()))
+        result = cmd.send_config_set(ospf_nw)
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
 
+    def set_eigrp(self):
+        eigrp_nwlist = [enw1.get(),enw2.get(),enw3.get(),enw4.get(),enw5.get()]
+        eigrp_snlist = [esn1.get(),esn2.get(),esn3.get(),esn4.get(),esn5.get()]
+        eigrp_nw = ["router eigrp 1","no auto-summary"]
+        for i in range(5):
+            if eigrp_nwlist[i] != "" and eigrp_snlist[i] != "":
+                eigrp_nw.append("network {0} {1}".format(eigrp_nwlist[i],eigrp_snlist[i]))
+        if eigrppri.get() != "":
+            eigrp_nw.append("eigrp router-id {0}".format(eigrppri.get()))
+        result = cmd.send_config_set(eigrp_nw)
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
 
-
-
+    def set_rip(self):
+        rip_nwlist = [rnw1.get(),rnw2.get(),rnw3.get(),rnw4.get(),rnw5.get()]
+        rip_nw = ["router rip","version 2", "no auto-summary"]
+        for i in range(5):
+            if rip_nwlist[i] != "":
+                rip_nw.append("network {0}".format(rip_nwlist[i]))
+        print(rip_nw)
+        result = cmd.send_config_set(rip_nw)
+        runningConf.delete("1.0","end")
+        runningConf.insert(tk.END, result)
 
 
 #-----------------------------------------------------------
