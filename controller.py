@@ -4,7 +4,7 @@ from netmiko import *
 cisco_ios = {
     "device_type": "cisco_ios_telnet",
     "host": "10.144.10.10",
-    "port" : "5002"
+    "port" : "5001"
 }
 
 cmd = ConnectHandler(**cisco_ios)
@@ -75,3 +75,6 @@ def changeStatus(status, want):
         if want == "config":
             configTerminal()
             status = "config"
+
+
+cmd.enable(pattern=123)
