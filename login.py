@@ -306,53 +306,96 @@ class App:
             selection = "You selected the option " + str(var.get())
             label.config(text = selection)
 
-            var = tk.IntVar()
+        var = tk.IntVar()
 
-            tk.Radiobutton(dynamic_route_frame, text="OSPF", variable=var, value=1,
-                            command=sel).pack()
-
-            tk.Radiobutton(dynamic_route_frame, text="EIGRP", variable=var, value=2,
-                            command=sel).pack()
-
-            tk.Radiobutton(dynamic_route_frame, text="RIPv2", variable=var, value=3,
-                            command=sel).pack()
-
-            label = tk.Label(dynamic_route_frame)
-            label.pack()
-
-            tk.Button(dynamic_route_frame, text="Set Routing Protocol").pack()
-
-            '''Default Route'''
-            default_route_frame = tk.Frame(config_frame)
-            default_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
-            default_route_frame.columnconfigure(0,weight=1)
-
-            tk.Label(default_route_frame, text="Set Default Route").grid(row=0, column=0, columnspan=3)
-            tk.Label(default_route_frame, text="Next-Hop Interace : ").grid(row=1, column=0)
-            tk.Entry(default_route_frame, bd=2).grid(row=1, column=1)
-            tk.Button(default_route_frame, text="Set").grid(row=1, column=2)
-
-            '''Secure'''
-            secure_frame = tk.Frame(config_frame)
-            secure_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
-            secure_frame.columnconfigure(0, weight=1)
-
-            tk.Label(secure_frame, text="Security Set-up").grid(row=0, column=0, columnspan=3)
-
-            tk.Label(secure_frame, text="Set Enable Password : ").grid(row=1, column=0)
-            tk.Entry(secure_frame, bd=2).grid(row=1, column=1)
-            tk.Button(secure_frame, text="Set").grid(row=1, column=2)
-
-
-
-
-
-
-
-
-
-
-
+        tk.Radiobutton(dynamic_route_frame, text="OSPF", variable=var, value=1,
+                          command=sel).pack()
+        
+        tk.Radiobutton(dynamic_route_frame, text="EIGRP", variable=var, value=2,
+                          command=sel).pack()
+        
+        tk.Radiobutton(dynamic_route_frame, text="RIPv2", variable=var, value=3,
+                          command=sel).pack()
+        
+        label = tk.Label(dynamic_route_frame)
+        label.pack()
+        
+        tk.Button(dynamic_route_frame, text="Set Routing Protocol").pack()
+        
+        '''Default Route'''
+        default_route_frame = tk.Frame(config_frame)
+        default_route_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+        default_route_frame.columnconfigure(0,weight=1)
+        
+        tk.Label(default_route_frame, text="Set Default Route").grid(row=0, column=0, columnspan=3)
+        tk.Label(default_route_frame, text="Next-Hop Interace : ").grid(row=1, column=0)
+        tk.Entry(default_route_frame, bd=2).grid(row=1, column=1)
+        tk.Button(default_route_frame, text="Set").grid(row=1, column=2)
+        
+        '''Secure'''
+        secure_frame = tk.Frame(config_frame)
+        secure_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+        secure_frame.columnconfigure(0, weight=1)
+        
+        tk.Label(secure_frame, text="Security Set-up").grid(row=0, column=0, columnspan=3)
+        
+        tk.Label(secure_frame, text="Set Enable Password : ").grid(row=1, column=0)
+        tk.Entry(secure_frame, bd=2).grid(row=1, column=1)
+        tk.Button(secure_frame, text="Set").grid(row=1, column=2)
+        
+        '''Service'''
+        service_frame = tk.Frame(config_frame)
+        service_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+        service_frame.columnconfigure(0, weight=1)
+        
+        tk.Label(service_frame, text="Set Your Services").grid(row=0, column=0, columnspan=3)
+        
+        tk.Label(service_frame, text="NTP Server Address : ").grid(row=1, column=0)
+        tk.Entry(service_frame, bd=2).grid(row=1, column=1)
+        tk.Button(service_frame, text="Set").grid(row=1, column=2)
+        
+        tk.Label(service_frame, text="Syslogs Server Address : ").grid(row=2, column=0)
+        tk.Entry(service_frame, bd=2).grid(row=2, column=1)
+        tk.Button(service_frame, text="Set").grid(row=2, column=2)
+        
+        tk.Label(service_frame, text="TFTP Server Address : ").grid(row=3, column=0)
+        tk.Entry(service_frame, bd=2).grid(row=3, column=1)
+        tk.Button(service_frame, text="Set").grid(row=3, column=2)
+        
+        
+        '''DHCP'''
+        dhcp_frame = tk.Frame(config_frame)
+        dhcp_frame.pack(side=tk.TOP, expand=True, fill=tk.X, padx=10, pady=5)
+        dhcp_frame.columnconfigure(0, weight=1)
+        
+        tk.Label(dhcp_frame, text="Setup DHCP Server").grid(row=0, column=0, columnspan=3)
+        
+        tk.Label(dhcp_frame, text="DHCP Pools Name : ").grid(row=1, column=0)
+        tk.Entry(dhcp_frame, bd=2).grid(row=1, column=1)
+        tk.Label(dhcp_frame, text="Subnet Mask").grid(row=1, column=2)
+        
+        tk.Label(dhcp_frame, text="Network Area : ").grid(row=2, column=0)
+        tk.Entry(dhcp_frame, bd=2).grid(row=2, column=1)
+        tk.Entry(dhcp_frame, bd=2).grid(row=2, column=2)
+        
+        tk.Label(dhcp_frame, text="(Optional) DNS Server Address : ").grid(row=3, column=0)
+        tk.Entry(dhcp_frame, bd=2).grid(row=3, column=1)
+        
+        tk.Label(dhcp_frame, text="(Optional) Domain-name : ").grid(row=4, column=0)
+        tk.Entry(dhcp_frame, bd=2).grid(row=4, column=1)
+        
+        tk.Button(dhcp_frame, text="Set").grid(row=5, column=2)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         app.mainloop()
 
 
